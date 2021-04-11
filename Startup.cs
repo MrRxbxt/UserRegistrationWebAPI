@@ -43,6 +43,8 @@ namespace UserRegistrationWebAPI
                 options.Password.RequireUppercase= false;
                 options.Password.RequiredLength = 4;
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +54,12 @@ namespace UserRegistrationWebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder =>
+            builder.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin());
 
             app.UseAuthentication();
 
